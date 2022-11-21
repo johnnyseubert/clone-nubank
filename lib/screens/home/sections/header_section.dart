@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nubank_refactor/utils/colors.dart';
+import 'package:nubank_refactor/utils/money.dart';
 
 class HeaderSection extends StatefulWidget {
-  const HeaderSection({Key? key}) : super(key: key);
+  final Money moneyController;
+
+  const HeaderSection({
+    Key? key,
+    required this.moneyController,
+  }) : super(key: key);
   @override
   createState() => _HeaderSectionState();
 }
@@ -55,12 +61,19 @@ class _HeaderSectionState extends State<HeaderSection> {
   Row _options() {
     return Row(
       children: [
-        IconButton(
-          icon: Icon(
-            MdiIcons.eye,
-            color: Colors.white,
-          ),
-          onPressed: () {},
+        ValueListenableBuilder(
+          valueListenable: widget.moneyController.showMoneyNotifier,
+          builder: (context, value, _) {
+            return IconButton(
+              icon: Icon(
+                widget.moneyController.showMoney
+                    ? MdiIcons.eye
+                    : MdiIcons.eyeOff,
+                color: Colors.white,
+              ),
+              onPressed: () => widget.moneyController.toggleMoney(),
+            );
+          },
         ),
         IconButton(
           icon: Icon(

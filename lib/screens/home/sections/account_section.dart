@@ -3,7 +3,12 @@ import 'package:nubank_refactor/globalComponents/row_chevron.dart';
 import 'package:nubank_refactor/utils/money.dart';
 
 class AccountSection extends StatefulWidget {
-  const AccountSection({Key? key}) : super(key: key);
+  final Money moneyController;
+
+  const AccountSection({
+    Key? key,
+    required this.moneyController,
+  }) : super(key: key);
   @override
   createState() => _AccountSectionState();
 }
@@ -18,16 +23,33 @@ class _AccountSectionState extends State<AccountSection> {
         children: [
           nuRowChevron("Conta", onPressed: () {}),
           SizedBox(height: 12),
-          _money(),
+          ValueListenableBuilder<bool>(
+            valueListenable: widget.moneyController.showMoneyNotifier,
+            builder: (_, show, __) {
+              return ValueListenableBuilder<double>(
+                valueListenable: widget.moneyController.moneyNotifier,
+                builder: (_, money, __) {
+                  return show
+                      ? Text(
+                          "R\$ $money",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      : Text(
+                          "····",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        );
+                },
+              );
+            },
+          ),
         ],
       ),
-    );
-  }
-
-  Widget _money() {
-    return Text(
-      "R\$ ${Money().value}",
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
     );
   }
 }

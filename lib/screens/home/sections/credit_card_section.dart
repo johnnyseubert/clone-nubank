@@ -5,7 +5,12 @@ import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/utils/money.dart';
 
 class CreditCardSection extends StatelessWidget {
-  const CreditCardSection({Key? key}) : super(key: key);
+  final Money moneyController;
+
+  const CreditCardSection({
+    Key? key,
+    required this.moneyController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +25,31 @@ class CreditCardSection extends StatelessWidget {
           SizedBox(height: 12),
           nuLightText("Fatura Atual"),
           SizedBox(height: 12),
-          nuTitle("R\$ ${Money().creditCardLimit}"),
+          ValueListenableBuilder<bool>(
+            valueListenable: moneyController.showMoneyNotifier,
+            builder: (_, show, __) {
+              return ValueListenableBuilder<double>(
+                valueListenable: moneyController.creditCardLimitNotifier,
+                builder: (___, money, ____) {
+                  return nuTitle(show ? "R\$ $money" : "····");
+                },
+              );
+            },
+          ),
           SizedBox(height: 12),
-          nuLightText("Limite disponível de R\$ ${Money().creditCardLimit}"),
+          ValueListenableBuilder<bool>(
+            valueListenable: moneyController.showMoneyNotifier,
+            builder: (_, show, __) {
+              return ValueListenableBuilder(
+                valueListenable: moneyController.creditCardLimitNotifier,
+                builder: (___, value, _____) {
+                  return nuLightText(
+                    "Limite disponível de R\$ ${show ? value : "····"}",
+                  );
+                },
+              );
+            },
+          ),
           SizedBox(height: 12),
           _buys(),
         ],

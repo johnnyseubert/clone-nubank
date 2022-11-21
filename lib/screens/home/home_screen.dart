@@ -9,6 +9,7 @@ import 'package:nubank_refactor/screens/home/sections/menu_section.dart';
 import 'package:nubank_refactor/screens/home/sections/my_cards_section.dart';
 import 'package:nubank_refactor/screens/home/sections/notification_section.dart';
 import 'package:nubank_refactor/utils/colors.dart';
+import 'package:nubank_refactor/utils/money.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -26,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Icon(Icons.sports_basketball_outlined),
   ];
 
+  var moneyController = Money();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,14 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           color: Colors.white,
           child: Column(
-            children: const [
-              HeaderSection(),
-              AccountSection(),
+            children: [
+              HeaderSection(moneyController: moneyController),
+              AccountSection(moneyController: moneyController),
               MenuSection(),
               MyCardsSection(),
               NotificationSection(),
               Divider(thickness: 1.2),
-              CreditCardSection(),
+              CreditCardSection(moneyController: moneyController),
               Divider(thickness: 1.2),
               FollowSection(),
               Divider(thickness: 1.2),
@@ -82,11 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
       selectedItemColor: nuPrimary,
       unselectedItemColor: nuMedium,
       type: BottomNavigationBarType.fixed,
-      items: bottomItems.map((Icon e) => _bottomNavigationBarItem(e)).toList(),
+      items: bottomItems
+          .map((Icon item) => _bottomNavigationBarItem(item))
+          .toList(),
       onTap: (int newIndex) {
-        setState(() {
-          _currentBottomNavigationIndex = newIndex;
-        });
+        setState(() => _currentBottomNavigationIndex = newIndex);
       },
     );
   }

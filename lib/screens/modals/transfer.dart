@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nubank_refactor/globalComponents/dialog_header.dart';
 import 'package:nubank_refactor/utils/colors.dart';
+import 'package:nubank_refactor/utils/money.dart';
 
 Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
   final modalHeight = MediaQuery.of(context).size.height * height;
+  var money = Money();
 
   return Container(
     width: double.infinity,
@@ -33,7 +35,28 @@ Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
             ),
           ),
           SizedBox(height: 12),
-          _saldo("Saldo disponível em conta ", "R\$ 1.000,00"),
+          ValueListenableBuilder(
+            valueListenable: money.moneyNotifier,
+            builder: (context, value, _) {
+              return RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Saldo disponível em conta ",
+                      style: TextStyle(color: nuDark),
+                    ),
+                    TextSpan(
+                      text: "R\$ $value",
+                      style: TextStyle(
+                        color: nuDark,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
           SizedBox(height: 12),
           TextFormField(
             autofocus: true,
@@ -47,23 +70,6 @@ Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
           ),
         ],
       ),
-    ),
-  );
-}
-
-RichText _saldo(String text, String price) {
-  return RichText(
-    text: TextSpan(
-      children: [
-        TextSpan(
-          text: text,
-          style: TextStyle(color: nuDark),
-        ),
-        TextSpan(
-          text: price,
-          style: TextStyle(color: nuDark, fontWeight: FontWeight.w600),
-        ),
-      ],
     ),
   );
 }

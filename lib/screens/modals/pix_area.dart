@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nubank_refactor/globalComponents/dialog_header.dart';
 import 'package:nubank_refactor/globalComponents/menu.dart';
 import 'package:nubank_refactor/screens/modals/qr_copy_paste.dart';
@@ -46,7 +47,7 @@ Widget dialogPixArea(BuildContext context, {double height = 0.95}) {
                 ),
                 SizedBox(width: 40),
                 nuMenuIcon(
-                  icon: Icons.monetization_on_outlined,
+                  icon: MdiIcons.cashFast,
                   text: "Depositar",
                 ),
               ],
@@ -67,7 +68,7 @@ SingleChildScrollView _menus(BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           nuMenuIcon(
-            icon: Icons.monetization_on_outlined,
+            icon: MdiIcons.cash,
             text: "Transferir",
             ontap: () {
               showModalBottomSheet(
