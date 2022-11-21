@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 
 class HeaderSection extends StatefulWidget {
@@ -42,7 +43,7 @@ class _HeaderSectionState extends State<HeaderSection> {
         ),
         child: IconButton(
           icon: Icon(
-            Icons.account_circle_outlined,
+            MdiIcons.account,
             color: Colors.white,
           ),
           onPressed: () {},
@@ -56,7 +57,7 @@ class _HeaderSectionState extends State<HeaderSection> {
       children: [
         IconButton(
           icon: Icon(
-            Icons.account_circle_outlined,
+            MdiIcons.eye,
             color: Colors.white,
           ),
           onPressed: () {},
