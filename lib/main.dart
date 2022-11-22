@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nubank_refactor/screens/home/home_screen.dart';
+import 'package:nubank_refactor/screens/intro/intro_screen.dart';
+import 'package:nubank_refactor/utils/routes.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +18,9 @@ class NubankApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: HomeScreen(),
+      routes: getRoutes(context),
+      initialRoute: AppRoutes.intro,
+      home: IntroScreen(),
     );
   }
 }
