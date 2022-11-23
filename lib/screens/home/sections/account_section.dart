@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/row_chevron.dart';
 import 'package:nubank_refactor/utils/money.dart';
+import 'package:provider/provider.dart';
 
 class AccountSection extends StatefulWidget {
-  final Money moneyController;
-
-  const AccountSection({
-    Key? key,
-    required this.moneyController,
-  }) : super(key: key);
+  const AccountSection({Key? key}) : super(key: key);
   @override
   createState() => _AccountSectionState();
 }
@@ -19,40 +15,29 @@ class _AccountSectionState extends State<AccountSection> {
 
   @override
   Widget build(BuildContext context) {
+    final moneyProvider = Provider.of<MoneyProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          nuRowChevron("Conta", onPressed: () {}),
-          SizedBox(height: 12),
-          ValueListenableBuilder<bool>(
-            valueListenable: widget.moneyController.showMoneyNotifier,
-            builder: (_, show, __) {
-              return ValueListenableBuilder<double>(
-                valueListenable: widget.moneyController.moneyNotifier,
-                builder: (_, money, __) {
-                  return show
-                      ? Text(
-                          real.format(money),
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      : Text(
-                          "····",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        );
-                },
-              );
-            },
-          ),
-        ],
-      ),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        nuRowChevron("Conta", onPressed: () {}),
+        SizedBox(height: 12),
+        moneyProvider.showMoney
+            ? Text(
+                real.format(moneyProvider.money),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            : Text(
+                "····",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+      ]),
     );
   }
 }

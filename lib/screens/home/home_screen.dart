@@ -9,7 +9,6 @@ import 'package:nubank_refactor/screens/home/sections/menu_section.dart';
 import 'package:nubank_refactor/screens/home/sections/my_cards_section.dart';
 import 'package:nubank_refactor/screens/home/sections/notification_section.dart';
 import 'package:nubank_refactor/utils/colors.dart';
-import 'package:nubank_refactor/utils/money.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,8 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     Icon(Icons.sports_basketball_outlined),
   ];
 
-  var moneyController = Money();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,14 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           color: Colors.white,
           child: Column(
-            children: [
-              HeaderSection(moneyController: moneyController),
-              AccountSection(moneyController: moneyController),
-              MenuSection(moneyController: moneyController),
+            children: const [
+              HeaderSection(),
+              AccountSection(),
+              MenuSection(),
               MyCardsSection(),
               NotificationSection(),
               Divider(thickness: 1.2),
-              CreditCardSection(moneyController: moneyController),
+              CreditCardSection(),
               Divider(thickness: 1.2),
               FollowSection(),
               Divider(thickness: 1.2),

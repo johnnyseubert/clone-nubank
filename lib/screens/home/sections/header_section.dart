@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/utils/money.dart';
+import 'package:provider/provider.dart';
 
 class HeaderSection extends StatefulWidget {
-  final Money moneyController;
-
-  const HeaderSection({
-    Key? key,
-    required this.moneyController,
-  }) : super(key: key);
+  const HeaderSection({Key? key}) : super(key: key);
   @override
   createState() => _HeaderSectionState();
 }
@@ -29,7 +25,7 @@ class _HeaderSectionState extends State<HeaderSection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 _profile(),
-                _options(),
+                _options(context),
               ],
             ),
             _welcome(),
@@ -58,22 +54,17 @@ class _HeaderSectionState extends State<HeaderSection> {
     );
   }
 
-  Row _options() {
+  Row _options(BuildContext context) {
+    final moneyProvider = Provider.of<MoneyProvider>(context);
+
     return Row(
       children: [
-        ValueListenableBuilder(
-          valueListenable: widget.moneyController.showMoneyNotifier,
-          builder: (context, value, _) {
-            return IconButton(
-              icon: Icon(
-                widget.moneyController.showMoney
-                    ? MdiIcons.eye
-                    : MdiIcons.eyeOff,
-                color: Colors.white,
-              ),
-              onPressed: () => widget.moneyController.toggleMoney(),
-            );
-          },
+        IconButton(
+          icon: Icon(
+            moneyProvider.showMoney ? MdiIcons.eye : MdiIcons.eyeOff,
+            color: Colors.white,
+          ),
+          onPressed: () => moneyProvider.toggleMoney(),
         ),
         IconButton(
           icon: Icon(

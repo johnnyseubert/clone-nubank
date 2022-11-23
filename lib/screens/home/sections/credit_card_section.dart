@@ -4,12 +4,10 @@ import 'package:nubank_refactor/globalComponents/row_chevron.dart';
 import 'package:nubank_refactor/globalComponents/texts.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/utils/money.dart';
+import 'package:provider/provider.dart';
 
 class CreditCardSection extends StatefulWidget {
-  final Money moneyController;
-
-  const CreditCardSection({Key? key, required this.moneyController})
-      : super(key: key);
+  const CreditCardSection({Key? key}) : super(key: key);
 
   @override
   createState() => _CreditCardSectionState();
@@ -20,6 +18,8 @@ class _CreditCardSectionState extends State<CreditCardSection> {
 
   @override
   Widget build(BuildContext context) {
+    final moneyProvider = Provider.of<MoneyProvider>(context);
+
     return Container(
       padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
       width: double.infinity,
@@ -31,30 +31,12 @@ class _CreditCardSectionState extends State<CreditCardSection> {
           SizedBox(height: 12),
           nuLightText("Fatura Atual"),
           SizedBox(height: 12),
-          ValueListenableBuilder<bool>(
-            valueListenable: widget.moneyController.showMoneyNotifier,
-            builder: (_, show, __) {
-              return ValueListenableBuilder<double>(
-                valueListenable: widget.moneyController.creditCardLimitNotifier,
-                builder: (___, money, ____) {
-                  return nuTitle(show ? real.format(money) : "····");
-                },
-              );
-            },
+          nuTitle(
+            moneyProvider.showMoney ? real.format(moneyProvider.money) : "····",
           ),
           SizedBox(height: 12),
-          ValueListenableBuilder<bool>(
-            valueListenable: widget.moneyController.showMoneyNotifier,
-            builder: (_, show, __) {
-              return ValueListenableBuilder(
-                valueListenable: widget.moneyController.creditCardLimitNotifier,
-                builder: (___, cardLimit, _____) {
-                  return nuLightText(
-                    "Limite disponível de ${show ? real.format(cardLimit) : "····"}",
-                  );
-                },
-              );
-            },
+          nuLightText(
+            "Limite disponível de ${moneyProvider.showMoney ? real.format(moneyProvider.creditCardLimit) : "····"}",
           ),
           SizedBox(height: 12),
           _buys(),

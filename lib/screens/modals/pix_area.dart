@@ -5,12 +5,10 @@ import 'package:nubank_refactor/globalComponents/menu.dart';
 import 'package:nubank_refactor/screens/modals/qr_copy_paste.dart';
 import 'package:nubank_refactor/screens/modals/transfer.dart';
 import 'package:nubank_refactor/utils/colors.dart';
-import 'package:nubank_refactor/utils/money.dart';
 
 Widget dialogPixArea(
   BuildContext context, {
   double height = 0.95,
-  required Money moneyController,
 }) {
   final modalHeight = MediaQuery.of(context).size.height * height;
 
@@ -38,7 +36,7 @@ Widget dialogPixArea(
           SizedBox(height: 12),
           _title(context, text: "Enviar"),
           SizedBox(height: 12),
-          _menus(context, moneyController),
+          _menus(context),
           SizedBox(height: 12),
           _title(context, text: "Receber"),
           SizedBox(height: 12),
@@ -64,7 +62,7 @@ Widget dialogPixArea(
   );
 }
 
-SingleChildScrollView _menus(BuildContext context, Money moneyController) {
+SingleChildScrollView _menus(BuildContext context) {
   return SingleChildScrollView(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -80,11 +78,7 @@ SingleChildScrollView _menus(BuildContext context, Money moneyController) {
                 isScrollControlled: true,
                 context: context,
                 builder: (ctx) {
-                  return dialogTransfer(
-                    ctx,
-                    height: 0.9,
-                    moneyController: moneyController,
-                  );
+                  return dialogTransfer(ctx, height: 0.9);
                 },
               );
             },

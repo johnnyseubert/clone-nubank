@@ -4,13 +4,14 @@ import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/dialog_header.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/utils/money.dart';
+import 'package:provider/provider.dart';
 
 Widget dialogTransfer(
   BuildContext context, {
-  required Money moneyController,
   double height = 0.95,
 }) {
   final modalHeight = MediaQuery.of(context).size.height * height;
+  final moneyProvider = Provider.of<MoneyProvider>(context);
 
   NumberFormat real = NumberFormat.currency(
     locale: 'pt_BR',
@@ -51,34 +52,28 @@ Widget dialogTransfer(
             ),
           ),
           SizedBox(height: 12),
-          ValueListenableBuilder(
-            valueListenable: moneyController.moneyNotifier,
-            builder: (_, money, __) {
-              return RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Saldo disponível em conta ",
-                      style: TextStyle(color: nuDark),
-                    ),
-                    TextSpan(
-                      text: real.format(money),
-                      style: TextStyle(
-                        color: nuDark,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "Saldo disponível em conta ",
+                  style: TextStyle(color: nuDark),
                 ),
-              );
-            },
+                TextSpan(
+                  text: real.format(moneyProvider.money),
+                  style: TextStyle(
+                    color: nuDark,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 12),
           TextFormField(
             autofocus: true,
             onEditingComplete: () {
-              moneyController.money -=
-                  _formatter.getUnformattedValue() as double;
+              moneyProvider.money -= _formatter.getUnformattedValue() as double;
               Navigator.pop(context);
             },
             initialValue: _formatter.format("0.0"),

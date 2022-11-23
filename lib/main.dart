@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nubank_refactor/screens/intro/intro_screen.dart';
+import 'package:nubank_refactor/utils/money.dart';
 import 'package:nubank_refactor/utils/routes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,15 +14,18 @@ class NubankApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Clone Nubank Refactor",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
+    return ChangeNotifierProvider(
+      create: (ctx) => MoneyProvider(),
+      child: MaterialApp(
+        title: "Clone Nubank Refactor",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+        ),
+        routes: getRoutes(context),
+        initialRoute: AppRoutes.intro,
+        home: IntroScreen(),
       ),
-      routes: getRoutes(context),
-      initialRoute: AppRoutes.intro,
-      home: IntroScreen(),
     );
   }
 }

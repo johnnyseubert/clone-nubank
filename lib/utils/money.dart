@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 
-class Money {
-  var moneyNotifier = ValueNotifier<double>(856723.01);
-  var creditCardLimitNotifier = ValueNotifier<double>(5050.00);
-  var showMoneyNotifier = ValueNotifier<bool>(true);
+class MoneyProvider with ChangeNotifier {
+  double _money = 856723.01;
+  double _creditCardLimit = 5050.00;
+  bool _showMoney = true;
 
-  double get creditCardLimit => creditCardLimitNotifier.value;
-  bool get showMoney => showMoneyNotifier.value;
+  double get money => _money;
+  double get creditCardLimit => _creditCardLimit;
+  bool get showMoney => _showMoney;
 
-  double get money => moneyNotifier.value;
-  set money(double newValue) {
-    moneyNotifier.value = newValue;
+  void toggleMoney() {
+    _showMoney = !_showMoney;
+    notifyListeners();
   }
 
-  void toggleMoney() => showMoneyNotifier.value = !showMoneyNotifier.value;
+  set money(double newValue) {
+    _money = newValue;
+    notifyListeners();
+  }
+
+  set creditCardLimit(double newLimit) {
+    _creditCardLimit = newLimit;
+    notifyListeners();
+  }
 }
