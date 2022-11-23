@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/dialog_header.dart';
 import 'package:nubank_refactor/utils/colors.dart';
-import 'package:nubank_refactor/utils/money.dart';
+import 'package:nubank_refactor/providers/money.dart';
 import 'package:provider/provider.dart';
 
 Widget dialogTransfer(

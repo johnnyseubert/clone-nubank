@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:nubank_refactor/utils/colors.dart';
-import 'package:nubank_refactor/utils/money.dart';
+import 'package:nubank_refactor/providers/money.dart';
 import 'package:provider/provider.dart';
 
 class HeaderSection extends StatefulWidget {

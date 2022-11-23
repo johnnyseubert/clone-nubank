@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/row_chevron.dart';
 import 'package:nubank_refactor/globalComponents/texts.dart';
 import 'package:nubank_refactor/utils/colors.dart';
-import 'package:nubank_refactor/utils/money.dart';
+import 'package:nubank_refactor/providers/money.dart';
 import 'package:provider/provider.dart';
 
 class CreditCardSection extends StatefulWidget {

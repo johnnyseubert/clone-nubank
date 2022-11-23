@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nubank_refactor/screens/intro/intro_screen.dart';
-import 'package:nubank_refactor/utils/money.dart';
+import 'package:nubank_refactor/providers/money.dart';
 import 'package:nubank_refactor/utils/routes.dart';
 import 'package:provider/provider.dart';
 
