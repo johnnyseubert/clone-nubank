@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:nubank_refactor/providers/user.dart';
-import 'package:nubank_refactor/screens/intro/intro_screen.dart';
+import 'package:nubank_refactor/screens/home/home_screen.dart';
 import 'package:nubank_refactor/providers/money.dart';
+import 'package:nubank_refactor/screens/splash/splash_screen.dart';
 import 'package:nubank_refactor/utils/routes.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(NubankApp());
+
+  runApp(const SplashScreen());
+
+  await Future.delayed(Duration(seconds: 2));
+
+  runApp(const NubankApp());
 }
 
 class NubankApp extends StatelessWidget {
@@ -27,8 +33,8 @@ class NubankApp extends StatelessWidget {
           primarySwatch: Colors.deepPurple,
         ),
         routes: getRoutes(context),
-        initialRoute: AppRoutes.intro,
-        home: IntroScreen(),
+        initialRoute: AppRoutes.home,
+        home: HomeScreen(),
       ),
     );
   }
