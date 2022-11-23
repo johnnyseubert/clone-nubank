@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/row_chevron.dart';
 import 'package:nubank_refactor/globalComponents/texts.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/utils/money.dart';
 
-class CreditCardSection extends StatelessWidget {
+class CreditCardSection extends StatefulWidget {
   final Money moneyController;
 
-  const CreditCardSection({
-    Key? key,
-    required this.moneyController,
-  }) : super(key: key);
+  const CreditCardSection({Key? key, required this.moneyController})
+      : super(key: key);
+
+  @override
+  createState() => _CreditCardSectionState();
+}
+
+class _CreditCardSectionState extends State<CreditCardSection> {
+  NumberFormat real = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
 
   @override
   Widget build(BuildContext context) {
@@ -26,25 +32,25 @@ class CreditCardSection extends StatelessWidget {
           nuLightText("Fatura Atual"),
           SizedBox(height: 12),
           ValueListenableBuilder<bool>(
-            valueListenable: moneyController.showMoneyNotifier,
+            valueListenable: widget.moneyController.showMoneyNotifier,
             builder: (_, show, __) {
               return ValueListenableBuilder<double>(
-                valueListenable: moneyController.creditCardLimitNotifier,
+                valueListenable: widget.moneyController.creditCardLimitNotifier,
                 builder: (___, money, ____) {
-                  return nuTitle(show ? "R\$ $money" : "····");
+                  return nuTitle(show ? real.format(money) : "····");
                 },
               );
             },
           ),
           SizedBox(height: 12),
           ValueListenableBuilder<bool>(
-            valueListenable: moneyController.showMoneyNotifier,
+            valueListenable: widget.moneyController.showMoneyNotifier,
             builder: (_, show, __) {
               return ValueListenableBuilder(
-                valueListenable: moneyController.creditCardLimitNotifier,
-                builder: (___, value, _____) {
+                valueListenable: widget.moneyController.creditCardLimitNotifier,
+                builder: (___, cardLimit, _____) {
                   return nuLightText(
-                    "Limite disponível de R\$ ${show ? value : "····"}",
+                    "Limite disponível de ${show ? real.format(cardLimit) : "····"}",
                   );
                 },
               );

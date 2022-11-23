@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/row_chevron.dart';
 import 'package:nubank_refactor/utils/money.dart';
 
@@ -14,6 +15,8 @@ class AccountSection extends StatefulWidget {
 }
 
 class _AccountSectionState extends State<AccountSection> {
+  NumberFormat real = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +34,7 @@ class _AccountSectionState extends State<AccountSection> {
                 builder: (_, money, __) {
                   return show
                       ? Text(
-                          "R\$ $money",
+                          real.format(money),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,

@@ -1,11 +1,27 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:nubank_refactor/globalComponents/dialog_header.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/utils/money.dart';
 
-Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
+Widget dialogTransfer(
+  BuildContext context, {
+  required Money moneyController,
+  double height = 0.95,
+}) {
   final modalHeight = MediaQuery.of(context).size.height * height;
-  var money = Money();
+
+  NumberFormat real = NumberFormat.currency(
+    locale: 'pt_BR',
+    symbol: 'R\$',
+  );
+
+  final _formatter = CurrencyTextInputFormatter(
+    locale: 'pt_BR',
+    decimalDigits: 2,
+    symbol: 'R\$',
+  );
 
   return Container(
     width: double.infinity,
@@ -36,8 +52,8 @@ Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
           ),
           SizedBox(height: 12),
           ValueListenableBuilder(
-            valueListenable: money.moneyNotifier,
-            builder: (context, value, _) {
+            valueListenable: moneyController.moneyNotifier,
+            builder: (_, money, __) {
               return RichText(
                 text: TextSpan(
                   children: [
@@ -46,7 +62,7 @@ Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
                       style: TextStyle(color: nuDark),
                     ),
                     TextSpan(
-                      text: "R\$ $value",
+                      text: real.format(money),
                       style: TextStyle(
                         color: nuDark,
                         fontWeight: FontWeight.w600,
@@ -60,8 +76,13 @@ Widget dialogTransfer(BuildContext context, {double height = 0.95}) {
           SizedBox(height: 12),
           TextFormField(
             autofocus: true,
-            onEditingComplete: () {},
-            initialValue: "R\$ 0,00",
+            onEditingComplete: () {
+              moneyController.money -=
+                  _formatter.getUnformattedValue() as double;
+              Navigator.pop(context);
+            },
+            initialValue: _formatter.format("0.0"),
+            inputFormatters: [_formatter],
             keyboardType: TextInputType.number,
             style: TextStyle(
               fontSize: 24,

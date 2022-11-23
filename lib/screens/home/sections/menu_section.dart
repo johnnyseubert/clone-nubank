@@ -3,9 +3,15 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:nubank_refactor/globalComponents/menu.dart';
 import 'package:nubank_refactor/screens/modals/pix_area.dart';
 import 'package:nubank_refactor/screens/modals/transfer.dart';
+import 'package:nubank_refactor/utils/money.dart';
 
 class MenuSection extends StatelessWidget {
-  const MenuSection({Key? key}) : super(key: key);
+  final Money moneyController;
+
+  const MenuSection({
+    Key? key,
+    required this.moneyController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +31,10 @@ class MenuSection extends StatelessWidget {
                   isScrollControlled: true,
                   context: context,
                   builder: (ctx) {
-                    return dialogPixArea(ctx);
+                    return dialogPixArea(
+                      ctx,
+                      moneyController: moneyController,
+                    );
                   },
                 );
               },
@@ -39,7 +48,10 @@ class MenuSection extends StatelessWidget {
                   isScrollControlled: true,
                   context: context,
                   builder: (ctx) {
-                    return dialogTransfer(ctx);
+                    return dialogTransfer(
+                      ctx,
+                      moneyController: moneyController,
+                    );
                   },
                 );
               },

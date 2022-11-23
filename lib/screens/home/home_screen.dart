@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               HeaderSection(moneyController: moneyController),
               AccountSection(moneyController: moneyController),
-              MenuSection(),
+              MenuSection(moneyController: moneyController),
               MyCardsSection(),
               NotificationSection(),
               Divider(thickness: 1.2),
