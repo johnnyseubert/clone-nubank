@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:nubank_refactor/providers/user.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/providers/money.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class _HeaderSectionState extends State<HeaderSection> {
                 _options(context),
               ],
             ),
-            _welcome(),
+            _welcome(context),
           ],
         ),
       ),
@@ -84,11 +85,13 @@ class _HeaderSectionState extends State<HeaderSection> {
     );
   }
 
-  Container _welcome() {
+  Container _welcome(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+
     return Container(
       margin: const EdgeInsets.only(top: 32),
-      child: const Text(
-        "Olá, Johnny",
+      child: Text(
+        "Olá, ${userProvider.name}",
         style: TextStyle(
           color: Colors.white,
           fontSize: 18,

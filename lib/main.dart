@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nubank_refactor/providers/user.dart';
 import 'package:nubank_refactor/screens/intro/intro_screen.dart';
 import 'package:nubank_refactor/providers/money.dart';
 import 'package:nubank_refactor/utils/routes.dart';
@@ -14,8 +15,11 @@ class NubankApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (ctx) => MoneyProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (ctx) => MoneyProvider()),
+        ChangeNotifierProvider(create: (ctx) => UserProvider()),
+      ],
       child: MaterialApp(
         title: "Clone Nubank Refactor",
         debugShowCheckedModeBanner: false,
