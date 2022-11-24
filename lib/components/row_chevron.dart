@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nubank_refactor/globalComponents/texts.dart';
+import 'package:nubank_refactor/components/texts.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 
 Widget nuRowChevron(String text, {required void Function() onPressed}) {

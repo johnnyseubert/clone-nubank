@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:nubank_refactor/globalComponents/row_chevron.dart';
-import 'package:nubank_refactor/globalComponents/texts.dart';
+import 'package:nubank_refactor/components/row_chevron.dart';
+import 'package:nubank_refactor/components/texts.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 import 'package:nubank_refactor/providers/money.dart';
 import 'package:provider/provider.dart';

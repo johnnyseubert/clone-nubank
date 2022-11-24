@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nubank_refactor/globalComponents/row_chevron.dart';
-import 'package:nubank_refactor/globalComponents/texts.dart';
+import 'package:nubank_refactor/components/row_chevron.dart';
+import 'package:nubank_refactor/components/texts.dart';
 
 class LoanSection extends StatelessWidget {
   const LoanSection({Key? key}) : super(key: key);

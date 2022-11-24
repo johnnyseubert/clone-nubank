@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nubank_refactor/globalComponents/dialog_header.dart';
-import 'package:nubank_refactor/globalComponents/menu.dart';
+import 'package:nubank_refactor/components/dialog_header.dart';
+import 'package:nubank_refactor/components/menu.dart';
 import 'package:nubank_refactor/utils/colors.dart';
 
 Widget dialogQrCopyPaste(BuildContext context, {double height = 0.95}) {

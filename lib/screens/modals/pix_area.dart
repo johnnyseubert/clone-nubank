@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:nubank_refactor/globalComponents/dialog_header.dart';
-import 'package:nubank_refactor/globalComponents/menu.dart';
+import 'package:nubank_refactor/components/dialog_header.dart';
+import 'package:nubank_refactor/components/menu.dart';
 import 'package:nubank_refactor/screens/modals/qr_copy_paste.dart';
 import 'package:nubank_refactor/screens/modals/transfer.dart';
 import 'package:nubank_refactor/utils/colors.dart';

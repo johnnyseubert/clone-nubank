@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:nubank_refactor/globalComponents/menu.dart';
+import 'package:nubank_refactor/components/menu.dart';
 import 'package:nubank_refactor/screens/modals/pix_area.dart';
 import 'package:nubank_refactor/screens/modals/transfer.dart';
 
